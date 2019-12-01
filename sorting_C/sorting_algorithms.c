@@ -19,6 +19,7 @@ void printList(int* list, int size){
 
 void _merge(int* lst, int start, int mid, int end){
     int *a = (int*) malloc(sizeof(int) * (mid - start));
+    int *a_keep = a;
     
     int size_a = mid - start;
     int a_index = 0;
@@ -48,6 +49,7 @@ void _merge(int* lst, int start, int mid, int end){
             lst_index++;
         }
     }
+    free(a_keep);
 }
 
 void merge_sort(int* list, int start, int end){
