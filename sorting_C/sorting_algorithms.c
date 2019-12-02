@@ -9,6 +9,7 @@
 #include "sorting_algorithms.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 void printList(int* list, int size){
     for (int i = 0; i < size; i++){
         printf("%d ", *list);
@@ -62,6 +63,48 @@ void merge_sort(int* list, int start, int end){
     _merge(list, start, mid, end);
 }
 
-void quicksort(){
+void _swap(int* list, int small_i, int big_i){
+    int temp = list[small_i];
+    list[small_i] = list[big_i];
+    list[big_i] = temp;
+}
+
+int _partition(int* list, int start, int end){
+    int pivot = list[start];
+    int *list_keep = list;
+    list = &(list[start+1]);
     
+    int small_i = 0;
+    int big_i = end - start - 2;
+    
+    bool small_inc = false;
+    
+    while (big_i > small_i){
+        small_inc = false;
+        
+        if (list[small_i] < pivot){
+            small_i++;
+            small_inc = true;
+        }else{
+            _swap(list, small_i, big_i);
+            big_i--;
+        }
+    }
+
+    if (!small_inc){
+        small_i++;
+    }
+    list = list_keep;
+    _swap(list, start, small_i + start);
+    return small_i + start;
+}
+
+void quick_sort(int *list, int start, int end){
+    if (end - start < 2){
+        return;
+    }
+    
+    int pivot_i = _partition(list, start, end);
+    quick_sort(list, start, pivot_i);
+    quick_sort(list, pivot_i + 1, end);
 }

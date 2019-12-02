@@ -12,5 +12,14 @@
 #include <stdio.h>
 
 #endif /* sorting_algorithms_h */
+/**
+Sorts a part of a given list. This function mutates the list given.
+
+Preconditions:
+   0 <= start < end <= length of the list
+*/
 void merge_sort(int* list, int start, int end);
+
+void quick_sort(int *list, int start, int end);
+
 void printList(int* list, int size);
