@@ -71,32 +71,21 @@ void _swap(int* list, int small_i, int big_i){
 
 int _partition(int* list, int start, int end){
     int pivot = list[start];
-    int *list_keep = list;
-    list = &(list[start+1]);
     
-    int small_i = 0;
-    int big_i = end - start - 2;
-    
-    bool small_inc = false;
-    
-    while (big_i > small_i){
-        small_inc = false;
+    int small_i = start + 1;
+    int big_i = end;
         
-        if (list[small_i] < pivot){
+    while (big_i > small_i){
+        
+        if (list[small_i] <= pivot){
             small_i++;
-            small_inc = true;
         }else{
-            _swap(list, small_i, big_i);
+            _swap(list, small_i, big_i - 1);
             big_i--;
         }
     }
-
-    if (!small_inc){
-        small_i++;
-    }
-    list = list_keep;
-    _swap(list, start, small_i + start);
-    return small_i + start;
+    _swap(list, start, small_i - 1);
+    return small_i - 1;
 }
 
 void quick_sort(int *list, int start, int end){
